@@ -3,15 +3,25 @@
 
 
 def canUnlockAll(boxes):
-    """Determines if all the boxes can be opened"""
-    if (type(boxes) is not list or len(boxes) == 0):
+    """
+    Determines if all the boxes can be opened.
+    
+    Parameters:
+    boxes (list of lists): A list where each element is a list containing keys to other boxes.
+    
+    Returns:
+    bool: True if all boxes can be opened, otherwise False.
+    """
+    if not isinstance(boxes, list) or len(boxes) == 0:
         return False
-    for k in range(1, len(boxes) - 1):
+
+    for k in range(1, len(boxes)):
         unlocked = False
         for i in range(len(boxes)):
-            unlocked = k in boxes[i] and k != i
-            if unlocked:
+            if k in boxes[i] and k != i:
+                unlocked = True
                 break
-        if unlocked is False:
-            return unlocked
+        if not unlocked:
+            return False
+
     return True
